@@ -1,9 +1,13 @@
 package com.test.bookstore.controller;
 
+import com.test.bookstore.mapper.BookMapper;
 import com.test.bookstore.model.Book;
 import com.test.bookstore.model.User;
+import com.test.bookstore.model.dto.BookDto;
+import com.test.bookstore.model.dto.BookResponseDto;
 import com.test.bookstore.repository.BookRepository;
 import com.test.bookstore.repository.UserRepository;
+import com.test.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,18 +25,17 @@ public class BookController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/books")
-    public List<Book> getBooks(Principal principal) {
-        String username = principal.getName();
-        System.out.println(username);
-//        Book book = new Book();
-//        book.setAuthor("Supanuth");
-//        book.setName("Harry Potter");
-//        book.setRecommended(true);
-//
-//        bookRepository.save(book);
+    @Autowired
+    private BookService bookService;
 
-        return bookRepository.findAll();
+    @Autowired
+    private BookMapper bookMapper;
+
+    @GetMapping("/books")
+    public BookResponseDto getBooks() {
+        List<Book> bookList = bookService.getAllBooks();
+        List<BookDto> bookDtoList = bookMapper.toDto(bookList);
+        return new BookResponseDto(bookDtoList);
     }
 
     @GetMapping("/order")
