@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +22,9 @@ public class BookController {
     private UserRepository userRepository;
 
     @GetMapping("/books")
-    public List<Book> getBooks() {
+    public List<Book> getBooks(Principal principal) {
+        String username = principal.getName();
+        System.out.println(username);
 //        Book book = new Book();
 //        book.setAuthor("Supanuth");
 //        book.setName("Harry Potter");
