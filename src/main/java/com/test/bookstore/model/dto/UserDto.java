@@ -7,7 +7,7 @@ public class UserDto {
     private String name;
     private String surname;
     private String date_of_birth;
-    private List<Integer> books_test;
+    private List<Integer> books;
 
     public String getName() {
         return name;
@@ -33,11 +33,12 @@ public class UserDto {
         this.date_of_birth = date_of_birth;
     }
 
-    public List<Integer> getBooks_test() {
-        return books_test;
+    public List<Integer> getBooks() {
+        return books;
     }
 
-    public void setBooks_test(List<Integer> books_test) {
-        this.books_test = books_test;
+    public void setBooks(List<Integer> books) {
+        this.books = books;
     }
+
 }

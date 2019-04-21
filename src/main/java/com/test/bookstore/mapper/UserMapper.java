@@ -1,5 +1,6 @@
 package com.test.bookstore.mapper;
 
+import com.test.bookstore.model.Book;
 import com.test.bookstore.model.User;
 import com.test.bookstore.model.dto.UserDto;
 import com.test.bookstore.model.dto.UserRequestDto;
@@ -11,8 +12,10 @@ import org.mapstruct.Named;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
@@ -20,7 +23,8 @@ public interface UserMapper {
     @Mappings({
         @Mapping(source = "name", target = "name"),
         @Mapping(source = "surname", target = "surname"),
-        @Mapping(source = "dateOfBirth", target = "date_of_birth", qualifiedByName = "mapDateToString")
+        @Mapping(source = "dateOfBirth", target = "date_of_birth", qualifiedByName = "mapDateToString"),
+        @Mapping(source = "books", target = "books", qualifiedByName = "modifiedBookList")
     })
     UserDto toDto(User user);
 
@@ -42,6 +46,15 @@ public interface UserMapper {
     default String mapDateToString(Date date) throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
+    }
+
+    @Named("modifiedBookList")
+    default List<Integer> modifiedBookList(List<Book> bookList)  {
+        return bookList == null || bookList.isEmpty() ? new ArrayList<>() : bookList
+            .stream()
+            .map(book -> Math.toIntExact(book.getId()))
+            .collect(Collectors.toList());
+
     }
 
 }
