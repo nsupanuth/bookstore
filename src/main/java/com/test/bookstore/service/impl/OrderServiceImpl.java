@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -26,6 +27,8 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public OrderResponseDto orderBooks(List<Integer> orderList, String username) {
+
+        orderList = orderList.stream().distinct().collect(Collectors.toList());
 
         Double totalPrice = 0d;
         User user = userRepository.findByUsername(username);
