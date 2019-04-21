@@ -4,11 +4,8 @@ import com.test.bookstore.mapper.UserMapper;
 import com.test.bookstore.model.User;
 import com.test.bookstore.model.dto.UserDto;
 import com.test.bookstore.model.dto.UserRequestDto;
-import com.test.bookstore.repository.UserRepository;
 import com.test.bookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,23 +17,10 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private UserService userService;
 
     @Autowired
     private UserMapper userMapper;
-
-    public PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-//    @PostMapping(path = "/users")
-//    public void registerNewUser(@RequestBody User user) {
-//        user.setPassword(getPasswordEncoder().encode(user.getPassword()));
-//        userRepository.save(user);
-//    }
 
     @PostMapping(path = "/users")
     public void registerNewUser(@RequestBody UserRequestDto userRequestDto) {
@@ -45,10 +29,8 @@ public class UserController {
 
     @GetMapping("/users")
     public List<UserDto> getUsers() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userService.getAllUsers();
         return userMapper.toDto(users);
     }
-
-
 
 }
