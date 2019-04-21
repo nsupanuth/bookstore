@@ -1,13 +1,12 @@
 package com.test.bookstore.model.dto;
 
-import java.util.Date;
 import java.util.List;
 
 public class UserDto {
 
     private String name;
     private String surname;
-    private Date date_of_birth;
+    private String date_of_birth;
     private List<Integer> books_test;
 
     public String getName() {
@@ -26,11 +25,11 @@ public class UserDto {
         this.surname = surname;
     }
 
-    public Date getDate_of_birth() {
+    public String getDate_of_birth() {
         return date_of_birth;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
+    public void setDate_of_birth(String date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
 
