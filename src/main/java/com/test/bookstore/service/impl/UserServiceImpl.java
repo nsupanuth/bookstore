@@ -33,6 +33,12 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAll();
     }
 
+    @Override
+    public void deleteUserByUsername(String username) {
+        User deletedUser = userRepository.findByUsername(username);
+        userRepository.delete(deletedUser);
+    }
+
     private PasswordEncoder getPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }

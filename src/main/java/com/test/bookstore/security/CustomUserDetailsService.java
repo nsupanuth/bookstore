@@ -3,13 +3,11 @@ package com.test.bookstore.security;
 import com.test.bookstore.model.User;
 import com.test.bookstore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.User.*;
-
-import java.util.List;
 
 
 @Service
@@ -20,10 +18,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        List<User> userList = userRepository.findByUsername(username);
-        User user = userList.get(0);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User : "+username+"Not Fond");
+            throw new UsernameNotFoundException("User : "+username+" not Fond");
         }
 
         UserBuilder builder = org.springframework.security.core.userdetails.User.withUsername(username);

@@ -6,14 +6,12 @@ import com.test.bookstore.model.dto.UserDto;
 import com.test.bookstore.model.dto.UserRequestDto;
 import com.test.bookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
-@RestController
+@RestController("/users")
 public class UserController {
 
     @Autowired
@@ -22,15 +20,21 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping(path = "/users")
+    @PostMapping
     public void registerNewUser(@RequestBody UserRequestDto userRequestDto) {
         userService.addNewUser(userRequestDto);
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List<UserDto> getUsers() {
         List<User> users = userService.getAllUsers();
         return userMapper.toDto(users);
+    }
+
+    @DeleteMapping
+    public void deleteCurrentUser(Principal principal) {
+        String username = principal.getName();
+        userService.deleteUserByUsername(username);
     }
 
 }
