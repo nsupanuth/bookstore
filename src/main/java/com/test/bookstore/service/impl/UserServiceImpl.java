@@ -1,5 +1,6 @@
 package com.test.bookstore.service.impl;
 
+import com.test.bookstore.common.exception.BadRequestAlertException;
 import com.test.bookstore.mapper.UserMapper;
 import com.test.bookstore.model.User;
 import com.test.bookstore.model.dto.UserRequestDto;
@@ -23,7 +24,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void addNewUser(UserRequestDto userRequestDto) {
-        userRequestDto.setPassword(getPasswordEncoder().encode(userRequestDto.getPassword()));
+        String username = userRequestDto.getUsername();
+        String password = userRequestDto.getPassword();
+        validateDuplicateUsername(username);
+
+        userRequestDto.setPassword(getPasswordEncoder().encode(password));
         User user = userMapper.fromUserRequestDto(userRequestDto);
         userRepository.save(user);
     }
@@ -37,6 +42,13 @@ public class UserServiceImpl implements UserService{
     public void deleteUserByUsername(String username) {
         User deletedUser = userRepository.findByUsername(username);
         userRepository.delete(deletedUser);
+    }
+
+    private void validateDuplicateUsername(String username) {
+        User existingUser = userRepository.findByUsername(username);
+        if (existingUser != null) {
+            throw new BadRequestAlertException("Username is already exist", UserService.class.getName(), "usernameAlreadyExist");
+        }
     }
 
     private PasswordEncoder getPasswordEncoder(){
