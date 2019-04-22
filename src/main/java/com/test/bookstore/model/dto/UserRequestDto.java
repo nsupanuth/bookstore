@@ -1,6 +1,9 @@
 package com.test.bookstore.model.dto;
 
+import com.test.bookstore.common.constant.RegxPatternConstants;
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class UserRequestDto {
 
@@ -8,6 +11,7 @@ public class UserRequestDto {
     private String username;
     @NotBlank
     private String password;
+    @Pattern(regexp = RegxPatternConstants.DATE_DD_MM_YY)
     private String date_of_birth;
     private String name;
     private String surname;

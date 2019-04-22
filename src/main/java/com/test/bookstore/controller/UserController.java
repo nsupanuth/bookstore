@@ -8,6 +8,7 @@ import com.test.bookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class UserController {
     private UserMapper userMapper;
 
     @PostMapping
-    public void registerNewUser(@RequestBody UserRequestDto userRequestDto) {
+    public void registerNewUser(@Valid @RequestBody UserRequestDto userRequestDto) {
         userService.addNewUser(userRequestDto);
     }
 
