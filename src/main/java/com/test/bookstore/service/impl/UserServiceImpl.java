@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -47,11 +47,11 @@ public class UserServiceImpl implements UserService{
     private void validateDuplicateUsername(String username) {
         User existingUser = userRepository.findByUsername(username);
         if (existingUser != null) {
-            throw new BadRequestAlertException("Username is already exist", UserService.class.getName(), "usernameAlreadyExist");
+            throw new BadRequestAlertException("usernameAlreadyExist", UserService.class.getName(), "Username is already exist");
         }
     }
 
-    private PasswordEncoder getPasswordEncoder(){
+    private PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

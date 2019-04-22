@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private UserRepository userRepository;
@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService{
 
         validateDuplicateOrderList(orderList, user);
 
-        for (Integer i: orderList) {
+        for (Integer i : orderList) {
 
             Optional<Book> bookOptional = bookRepository.findById(Long.valueOf(i));
 

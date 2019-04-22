@@ -12,7 +12,7 @@ import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookRepository bookRepository;
