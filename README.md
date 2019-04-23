@@ -16,7 +16,7 @@ generate the mapper class on complied time before start running the application.
 
 3) Test API by endpoints below 
 
-** http://localhost:8080/books **
+**/books**
 METHOD : GET
 
 - This API is for getting all available book lists.
@@ -31,7 +31,7 @@ curl -X GET \
 ```
 
 
-** http://localhost:8080/users **
+**/users**
 METHOD : POST
 
 Curl script
@@ -51,7 +51,7 @@ curl -X POST \
 }'
 ```
 
-** http://localhost:8080/users **
+**/users**
 METHOD : GET
 
 Curl script
@@ -63,7 +63,7 @@ curl -X GET \
   -H 'postman-token: 1e7c8f29-efb0-e563-ce48-ace4c500ed8c'
 ```
 
-** http://localhost:8080/users/orders **
+**/users/orders**
 METHOD : POST
 
 Curl script
@@ -80,7 +80,7 @@ curl -X POST \
 }'
 ```
 
-** http://localhost:8080/users **
+**/users**
 METHOD : DELETE
 
 Curl script
