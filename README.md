@@ -83,7 +83,6 @@ curl -X POST \
 ```
 
 **[DELETE] /users**
-METHOD : DELETE
 
 Curl script
 
