@@ -1,7 +1,9 @@
 package com.test.bookstore;
 
 import com.test.bookstore.model.Book;
+import com.test.bookstore.model.dto.BookDto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,6 +35,23 @@ public class TestUtils {
         return Arrays.asList(book, expectedBookLastOrder(), expectedBookFirstOrder());
     }
 
+    public BookDto mapBookToBookDto(Book book) {
+        BookDto bookDto = new BookDto();
+        bookDto.setId(book.getId());
+        bookDto.setName(book.getName());
+        bookDto.setAuthor(book.getAuthor());
+        bookDto.setPrice(book.getPrice());
+        bookDto.setIs_recommended(book.getRecommended());
+        return bookDto;
+    }
 
+    public List<BookDto> mapBookToBookDto(List<Book> books) {
+        List<BookDto> bookDtoList = new ArrayList<>();
+        for (Book book: books) {
+            BookDto bookDto = mapBookToBookDto(book);
+            bookDtoList.add(bookDto);
+        }
+        return bookDtoList;
+    }
 
 }
