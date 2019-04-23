@@ -20,6 +20,8 @@ generate the mapper class on complied time before start running the application.
 
 3) Test API by endpoints below 
 
+## API Endpoint
+
 **[GET] /books**
 
 - This API is for getting all available book lists.
