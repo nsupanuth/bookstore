@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
-@RestController("/users")
+@RestController
 public class UserController {
 
     @Autowired
@@ -21,18 +21,18 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping
+    @RequestMapping(method = RequestMethod.POST, value = "/users")
     public void registerNewUser(@Valid @RequestBody UserRequestDto userRequestDto) {
         userService.addNewUser(userRequestDto);
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET, value = "/users")
     public List<UserDto> getUsers() {
         List<User> users = userService.getAllUsers();
         return userMapper.toDto(users);
     }
 
-    @DeleteMapping
+    @RequestMapping(method = RequestMethod.DELETE, value = "/users")
     public void deleteCurrentUser(Principal principal) {
         String username = principal.getName();
         userService.deleteUserByUsername(username);

@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     private void validateDuplicateUsername(String username) {
         User existingUser = userRepository.findByUsername(username);
         if (existingUser != null) {
-            throw new BadRequestAlertException("usernameAlreadyExist", UserService.class.getName(), "Username is already exist");
+            throw new BadRequestAlertException( "Username is already exist", UserService.class.getName(), "usernameAlreadyExist");
         }
     }
 

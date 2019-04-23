@@ -3,6 +3,10 @@
 Develop a RESTful API for a bookstore that allows a user to login, perform user related tasks,
 view a list of books and place book orders.
 
+## API Documentation
+
+http://localhost:8080/v2/api-docs
+
 ## Getting Started
 
 1) Clone this repository to your machine 
@@ -16,8 +20,7 @@ generate the mapper class on complied time before start running the application.
 
 3) Test API by endpoints below 
 
-**/books**
-METHOD : GET
+**[GET] /books**
 
 - This API is for getting all available book lists.
 
@@ -31,8 +34,7 @@ curl -X GET \
 ```
 
 
-**/users**
-METHOD : POST
+**[POST] /users**
 
 Curl script
 
@@ -51,8 +53,7 @@ curl -X POST \
 }'
 ```
 
-**/users**
-METHOD : GET
+**[GET] /users**
 
 Curl script
 
@@ -63,8 +64,7 @@ curl -X GET \
   -H 'postman-token: 1e7c8f29-efb0-e563-ce48-ace4c500ed8c'
 ```
 
-**/users/orders**
-METHOD : POST
+**[POST] /users/orders**
 
 Curl script
 
@@ -80,7 +80,7 @@ curl -X POST \
 }'
 ```
 
-**/users**
+**[DELETE] /users**
 METHOD : DELETE
 
 Curl script
